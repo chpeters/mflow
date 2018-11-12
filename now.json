@@ -5,11 +5,13 @@
       "src": "frontend/package.json",
       "use": "@now/static-build",
       "config": { "distDir": "frontend/build" }
-    }
+    },
+    { "src": "api/*.js", "use": "@now/node" }
   ],
   "routes": [
     { "src": "^/static/(.*)", "dest": "/static/$1" },
-    { "src": ".*", "dest": "/index.html" }
+    { "src": ".*", "dest": "/index.html" },
+    { "src": "/api/(.*)", "dest": "/api/$1" }
   ],
   "alias": ["www.mflow.tech", "mflow.tech"]
 }
