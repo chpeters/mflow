@@ -34,10 +34,8 @@ See the section about [deployment](#deployment) for more information.
 
 ### [Now](https://zeit.co/now)
 
-We use Zeit Now for deployment. Every push (on every branch) to Github will run Now on the Dockerfile in the root directory. It will do the following steps:
+We use Zeit Now v2 for deployment. Every push (on every branch) to Github will run Now based on the `now.json` file in the root directory. It will do the following steps:
 
-1. Builds the app to static assets
-2. Runs the tests using `npm test` and breaks the build if the tests fail.
-3. Copies the assets to the public folder, so users can view them.
-4. Creates a URL for the deploy (i.e. blahblahbblah.now.sh)
-5. If the push was to master, it will alias that deploy to [mflow.tech](mflow.tech)
+1. Builds the app into static assets, putting it in `/build`
+2. Creates a URL for the deploy (i.e. blahblahbblah.now.sh)
+3. If the push was to master, it will alias that deploy to [mflow.tech](mflow.tech)
