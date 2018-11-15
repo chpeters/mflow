@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     { "src": "frontend/package.json", "use": "@now/static-build" },
-    { "src": "api/*.js", "use": "@now/node" }
+    { "src": "api/!(lib)/**/*.js", "use": "@now/node" }
   ],
   "routes": [
     { "src": "^/static/(.*)", "dest": "/frontend/static/$1" },
