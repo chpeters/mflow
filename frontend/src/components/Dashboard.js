@@ -3,7 +3,6 @@ import { ResponsiveBar } from '@nivo/bar'
 import { Card } from 'rebass'
 import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
-import ShadowCard from './ShadowCard'
 
 const lineData = [
     {
