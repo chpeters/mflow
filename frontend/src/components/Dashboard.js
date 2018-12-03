@@ -1,5 +1,6 @@
 import React from 'react'
 import { ResponsiveBar } from '@nivo/bar'
+import { Card } from 'rebass'
 import { ResponsiveLine } from '@nivo/line'
 import { ResponsivePie } from '@nivo/pie'
 import ShadowCard from './ShadowCard'
@@ -60,21 +61,38 @@ const pieData = [
  */
 const Dashboard = ({ title, data, type }) => (
   <div>
-    <ShadowCard>
+    <Card
+      borderRadius={10}
+      boxShadow="0px 0px 12px 1px rgba(0, 0, 0, 0.2)"
+      width={800}
+      height={450}
+      mt={50}
+    >
       <h2>Hello world</h2>
       <ResponsiveBar data={data} height={450} colorBy="index" />
-    </ShadowCard>
-    <br />
-    <ShadowCard>
+    </Card>
+    <Card
+      borderRadius={10}
+      boxShadow="0px 0px 12px 1px rgba(0, 0, 0, 0.2)"
+      width={800}
+      height={450}
+      mt={50}
+    >
       <h2>Hello world2</h2>
       <ResponsiveLine data={lineData} height={450}/>
-    </ShadowCard>
-    <br />
-    <ShadowCard>
+    </Card>
+    <Card
+      borderRadius={10}
+      boxShadow="0px 0px 12px 1px rgba(0, 0, 0, 0.2)"
+      width={800}
+      height={450}
+      mt={50}
+    >
       <h2>Hello world3</h2>
       <ResponsivePie data={pieData} height={450}/>
-    </ShadowCard>
+    </Card>
   </div>
+
 )
 
 export default Dashboard
