@@ -856,6 +856,31 @@
     lodash "^4.17.4"
     recompose "^0.26.0"
 
+"@nivo/line@^0.51.6":
+  version "0.51.6"
+  resolved "https://registry.yarnpkg.com/@nivo/line/-/line-0.51.6.tgz#801a01764b570f0b6e6e8fd287ca1a303f0c59d5"
+  integrity sha512-yhMP0JVJQT9EI9nmFjywOfB6oUbBfaygBaqn9P6pB0B+AYyFRn9FUGsNuB3pWCF5+X4EVAcIfuUutWtHW9mQfQ==
+  dependencies:
+    "@nivo/axes" "0.51.0"
+    "@nivo/core" "0.51.0"
+    "@nivo/legends" "0.51.0"
+    "@nivo/scales" "0.51.0"
+    d3-format "^1.3.2"
+    d3-scale "^2.1.2"
+    d3-shape "^1.2.2"
+    lodash "^4.17.4"
+    react-motion "^0.5.2"
+    recompose "^0.26.0"
+
+"@nivo/scales@0.51.0":
+  version "0.51.0"
+  resolved "https://registry.yarnpkg.com/@nivo/scales/-/scales-0.51.0.tgz#e6d5306a9d1fb675f463ce6195cae78347394ebe"
+  integrity sha512-Rnmsvv5c5s3D6UPdVWGNmpPp9+runSDg16PVIlXjr0PSM8nm4fjwJCGI5x6rxt1rQ2LFSUVcIuWDfBCnnaQb6Q==
+  dependencies:
+    d3-scale "^2.1.2"
+    d3-time-format "^2.1.3"
+    lodash "^4.17.4"
+
 "@nodelib/fs.stat@^1.1.2":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
