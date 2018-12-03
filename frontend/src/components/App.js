@@ -12,6 +12,8 @@ const App = () => (
     <Flex justifyContent="center">
       <Dashboard
         data={[{ id: 'test', value: 100 }, { id: 'test2', value: 200 }]}
+        title="visulization test"
+        type="pie"
       />
     </Flex>
   </>
