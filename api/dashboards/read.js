@@ -1,7 +1,13 @@
-import * as url from 'url'
-import res from '../lib/response'
-import pico from '../lib/pico'
+const connection = require("../database/connection.js");
 
-export default pico(req =>
-  res(`params: ${JSON.stringify(url.parse(req.url, true).query)}`, 200)
-)
+module.exports = (req, res) => {
+  const { user_id } = req.body;
+  connection.query(`select * from dashboard where user_id = ${user_id}`, function (error, results, fields) {
+    if (error) throw error;
+    if (results !== null) {
+      res.end(results);
+    } else {
+      res.end(-1);  
+    }
+  });
+}
