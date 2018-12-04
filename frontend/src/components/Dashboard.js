@@ -22,11 +22,11 @@ const Dashboard = ({ title, data, type }) => {
     <Card
       borderRadius={10}
       boxShadow="0px 0px 12px 1px rgba(0, 0, 0, 0.2)"
-      width={800}
+      width={1}
       mt={50}
       pt={15}
       px={25}
-      style={{ height: '450px' }}
+      style={{ height: '450px', maxWidth: '800px', minWidth: '500px' }}
     >
       <Heading textAlign="center" mb={10}>
         {title}

@@ -1,6 +1,6 @@
 import res from '../lib/response'
 import pico from '../lib/pico'
-import {client} from '../lib/plaid
+import {client} from '../lib/plaid'
 
 // Exchange token flow - exchange a Link public_token for
 // an API access_token
