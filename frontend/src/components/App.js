@@ -60,17 +60,60 @@ const dashboards = [
   },
 ]
 
-const App = () => (
-  <>
-    <Flex justifyContent="center">
-      <Box>
-        <Heading as="h1" fontSize={36} my={25}>
-          mFlow
-        </Heading>
-      </Box>
-    </Flex>
-    <DashboardList dashboards={dashboards} />
-  </>
-)
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      transactions: null,
+      dashboards: null,
+      queries: null,
+      currentDashboard: 0,
+    }
+  }
+
+  setTransactions = transactions => {
+    this.setState({ transactions })
+  }
+
+  addDashboard = dashboard => {
+    const { dashboards } = this.state
+    this.setState({ dashboards: dashboards.concat(dashboard) })
+  }
+
+  removeDashboard = id => {
+    const { dashboards } = this.state
+    this.setState({ dashboards: dashboards.filter(d => d.id === id) })
+  }
+
+  addQuery = query => {
+    const { queries } = this.state
+    this.setState({ queries: queries.concat(query) })
+  }
+
+  removeQuery = id => {
+    const { queries } = this.state
+    this.setState({ queries: queries.filter(q => q.id === id) })
+  }
+
+  switchDashboard = id => {
+    const { dashboards } = this.state
+    this.setState({ currentDashboard: dashboards.findIndex(d => d.id === id) })
+  }
+
+  render() {
+    return (
+      <>
+        <Flex justifyContent="center">
+          <Box>
+            <Heading as="h1" fontSize={36} my={25}>
+              mFlow
+            </Heading>
+          </Box>
+        </Flex>
+        <DashboardList dashboards={dashboards} />
+      </>
+    )
+  }
+}
 
 export default App
