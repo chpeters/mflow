@@ -1,70 +1,12 @@
 import React from 'react'
 import { Flex, Box, Heading } from 'rebass'
-import DashboardList from './DashboardList'
 import {
   getDashboards,
   getTransactions,
   getQueries,
   addDashboard,
 } from '../lib/api'
-
-const dashboards = [
-  {
-    title: 'Bar',
-    data: [{ id: 'test', value: 100 }, { id: 'test2', value: 200 }],
-    type: 'bar',
-  },
-  {
-    title: 'Line',
-    data: [
-      {
-        id: 'set1',
-        data: [{ x: 1, y: 1 }, { x: 2, y: 2 }, { x: 3, y: 3 }],
-      },
-      {
-        id: 'set2',
-        data: [{ x: 1, y: 2 }, { x: 4, y: 4 }, { x: 6, y: 1 }],
-      },
-    ],
-    type: 'line',
-  },
-  {
-    title: 'Pie',
-    data: [
-      {
-        id: 'erlang',
-        label: 'erlang',
-        value: 321,
-        color: 'hsl(52, 70%, 50%)',
-      },
-      {
-        id: 'lisp',
-        label: 'lisp',
-        value: 331,
-        color: 'hsl(87, 70%, 50%)',
-      },
-      {
-        id: 'scala',
-        label: 'scala',
-        value: 314,
-        color: 'hsl(296, 70%, 50%)',
-      },
-      {
-        id: 'c',
-        label: 'c',
-        value: 385,
-        color: 'hsl(258, 70%, 50%)',
-      },
-      {
-        id: 'stylus',
-        label: 'stylus',
-        value: 65,
-        color: 'hsl(258, 70%, 50%)',
-      },
-    ],
-    type: 'pie',
-  },
-]
+import Dashboard from './Dashboard'
 
 class App extends React.Component {
   constructor(props) {
@@ -108,7 +50,7 @@ class App extends React.Component {
   updateQueries = (id, qs) => {
     const { queries } = this.state
     const newQueries = { ...queries, [id]: qs }
-    this.setState({ queries: newQueries })
+    this.setState({ queries: { [id]: newQueries } })
   }
 
   addQuery = query => {
@@ -121,22 +63,29 @@ class App extends React.Component {
     this.setState({ queries: queries.filter(q => q.id === id) })
   }
 
+  getCurrentQueries = () => {
+    const { dashboards, currentDashboard, queries } = this.state
+    const currentId = dashboards[currentDashboard].dashboard_id
+    console.log(queries[currentId])
+    return queries[currentId]
+  }
+
   switchDashboard = async id => {
     const { dashboards, queries } = this.state
     const newIndex = dashboards.findIndex(d => d.dashboard_id === id)
+    const newDashboardId = dashboards[newIndex].dashboard_id
     try {
-      if (!queries || !queries[newIndex]) {
-        console.log('made it')
-        const queriesforNextDashboard = await getQueries(newIndex)
+      if (!queries || !queries[newDashboardId]) {
+        const queriesforNextDashboard = await getQueries(newDashboardId)
         if (!queries) {
-          this.setQueries(newIndex, queriesforNextDashboard)
+          this.setQueries(newDashboardId, queriesforNextDashboard)
         } else {
-          this.updateQueries(newIndex, queriesforNextDashboard)
+          this.updateQueries(newDashboardId, queriesforNextDashboard)
         }
+        this.setState({
+          currentDashboard: newIndex,
+        })
       }
-      this.setState({
-        currentDashboard: newIndex,
-      })
     } catch (err) {
       console.log(err)
     }
@@ -204,7 +153,7 @@ class App extends React.Component {
             </Heading>
           </Box>
         </Flex>
-        <DashboardList dashboards={dashboards[currentDashboard]} />
+        <Dashboard queries={this.getCurrentQueries()} />
       </>
     )
   }

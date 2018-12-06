@@ -1,39 +1,42 @@
 import React from 'react'
-import { ResponsiveBar } from '@nivo/bar'
-import { Card, Heading } from 'rebass'
-import { ResponsiveLine } from '@nivo/line'
-import { ResponsivePie } from '@nivo/pie'
+import { Heading } from 'rebass'
+import VisualizationList from './VisualizationList'
+import { getTransactionsByQuery } from '../lib/api'
 
-/**
- * ResponsiveBar:
- * Expects data of form [{key: string, value: number}...]
- *
- * ResponsiveLine
- * Expects data of form [{id: string, data: [{x:number, y:number}]}]
- */
-const Dashboard = ({ title, data, type }) => {
-  let choices = {
-    bar: <ResponsiveBar data={data} height={375} colorBy="index" />,
-    pie: <ResponsivePie data={data} height={375} />,
-    line: <ResponsiveLine data={data} height={375} />,
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      queriesWithData: null,
+    }
   }
 
-  return (
-    <Card
-      borderRadius={10}
-      boxShadow="0px 0px 12px 1px rgba(0, 0, 0, 0.2)"
-      width={1}
-      mt={50}
-      pt={15}
-      px={25}
-      style={{ height: '450px', maxWidth: '800px', minWidth: '500px' }}
-    >
-      <Heading textAlign="center" mb={10}>
-        {title}
-      </Heading>
-      {choices[type]}
-    </Card>
-  )
+  async componentDidMount() {
+    const { queries } = this.props
+    try {
+      const responses = await Promise.all(
+        queries.map(q => getTransactionsByQuery(q.query))
+      )
+      const queriesWithData = queries.map((q, i) => {
+        return {
+          query: q,
+          data: responses[i],
+        }
+      })
+      this.setState({ queriesWithData })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  render() {
+    const { queriesWithData } = this.state
+    if (!queriesWithData) {
+      return <Heading>Loading...</Heading>
+    }
+    // gives vlist an array [{query:..., data: ...} ...]
+    return <VisualizationList queries={queriesWithData} />
+  }
 }
 
 export default Dashboard
