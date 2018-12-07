@@ -29,7 +29,9 @@ function addFunctions(selectSql, funcs, hasComma) {
 function formatWheres(wheres) {
   let whereSql = ''
   wheres.forEach(where => {
-    whereSql += `and ${where.key}${where.operator}"${where.value}"`
+    whereSql += `${where.conjunction} ${where.key}${where.operator}"${
+      where.value
+    }"`
   })
   return whereSql
 }
