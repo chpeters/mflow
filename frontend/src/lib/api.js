@@ -1,6 +1,8 @@
-async function jsonFetch(url) {
+async function jsonFetch(url, body) {
+  console.log(url)
   try {
-    const res = await fetch(url)
+    const res = await fetch(url, { body })
+    console.log(res)
     const resJson = await res.json()
     if (res.ok) {
       return resJson
@@ -12,7 +14,8 @@ async function jsonFetch(url) {
   }
 }
 
-export const getDashboards = () => jsonFetch()
+export const getDashboards = id =>
+  jsonFetch(`https://mflow.tech/api/dashboards/read?id=${id}`)
 
 // massage the data returned into the format expected by the nivo graph
 // expected sql format: select <series> <x> <y> from transaction where <series> = <input>
@@ -52,18 +55,20 @@ function handleBarAndPieChart(data, query) {
   return returnData
 }
 
-export const getTransactionsByQuery = async query => {
+export const getTransactionsByQuery = async (query, id) => {
   const visualization_type = query.visualization_type
+  const query_json = query.query_json
+  const encodedQuery = encodeURIComponent(query_json)
   const data = await jsonFetch(
-    'mflow.tech/api/transaction/getTransactionsByQuery'
+    `https://mflow.tech/api/transaction/getTransactionsByQuery?query=${encodedQuery}&user_id=${id}`
   )
   switch (visualization_type) {
     case 'LINE_CHART':
-      return handleLineChart(data, query)
+      return handleLineChart(data, query_json)
     case 'BAR_CHART':
-      return handleBarAndPieChart(data, query)
+      return handleBarAndPieChart(data, query_json)
     case 'PIE_CHART':
-      return handleBarAndPieChart(data, query)
+      return handleBarAndPieChart(data, query_json)
     default:
       console.log('Unknown visualization type provided')
   }
@@ -73,4 +78,4 @@ const addDashboardJson = { dashboard_id: 1, user_id: 1, name: 'test' }
 export const addDashboard = () => Promise.resolve(addDashboardJson)
 
 export const getQueries = async id =>
-  jsonFetch('mflow.tech/api/query/fetchAllQueries')
+  jsonFetch(`https://mflow.tech/api/query/fetchAllQueries?id=${id}`)

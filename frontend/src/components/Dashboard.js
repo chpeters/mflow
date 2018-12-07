@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
     const { queries } = this.props
     try {
       const responses = await Promise.all(
-        queries.map(q => getTransactionsByQuery(q.query_json))
+        queries.map(q => getTransactionsByQuery(q))
       )
       const queriesWithData = queries.map((q, i) => {
         return {

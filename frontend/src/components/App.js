@@ -82,7 +82,7 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-      const dashboards = await getDashboards()
+      const dashboards = await getDashboards(1)
       this.setDashboards(dashboards)
       if (dashboards && dashboards.length > 0) {
         const id = dashboards[0].id
@@ -96,7 +96,6 @@ class App extends React.Component {
 
   render() {
     const { transactions, dashboards, currentDashboard, queries } = this.state
-    console.log(transactions, dashboards, currentDashboard, queries)
 
     if (!transactions || !dashboards) {
       return <Heading>Loading...</Heading>
