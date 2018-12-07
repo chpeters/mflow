@@ -1,26 +1,16 @@
 import React from 'react'
 import { Flex, Box, Heading } from 'rebass'
-import {
-  getDashboards,
-  getTransactions,
-  getQueries,
-  addDashboard,
-} from '../lib/api'
+import { getDashboards, getQueries, addDashboard } from '../lib/api'
 import Dashboard from './Dashboard'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      transactions: null,
       dashboards: null,
       queries: null,
       currentDashboard: 0,
     }
-  }
-
-  setTransactions = transactions => {
-    this.setState({ transactions })
   }
 
   setDashboards = dashboards => {
@@ -66,7 +56,6 @@ class App extends React.Component {
   getCurrentQueries = () => {
     const { dashboards, currentDashboard, queries } = this.state
     const currentId = dashboards[currentDashboard].dashboard_id
-    console.log(queries[currentId])
     return queries[currentId]
   }
 
@@ -93,9 +82,7 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-      const transactions = await getTransactions()
       const dashboards = await getDashboards()
-      this.setTransactions(transactions)
       this.setDashboards(dashboards)
       if (dashboards && dashboards.length > 0) {
         const id = dashboards[0].id
