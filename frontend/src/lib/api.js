@@ -70,7 +70,23 @@ export const getTransactionsByQuery = async query => {
 }
 
 const addDashboardJson = { dashboard_id: 1, user_id: 1, name: 'test' }
-export const addDashboard = () => Promise.resolve(addDashboardJson)
+export const addDashboard = async (user_id, name) => {
+  try {
+    const res = await fetch('mflow.tech/api/dashboards/create', {
+                                  method: 'post',
+                                  body: JSON.stringify({user_id: user_id, name: name}),
+                                  headers: { 'Content-Type': 'application/json' },
+                                });
+    const resJson = await res.json();
+    if (res.ok) {
+      return resJson
+    } else {
+      console.log(`error: ${res.statusCode} message: ${resJson}`)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const getQueries = async id =>
   jsonFetch('mflow.tech/api/query/fetchAllQueries')
