@@ -1,4 +1,4 @@
-import { end } from './response'
+import { end } from './response';
 
 /**
  * Pico
@@ -10,6 +10,6 @@ import { end } from './response'
  *                                returns a response object
  *
  */
-const pico = f => (req, res) => end(res, f(req))
+const pico = f => (req, res) => end(res, f(req));
 
-export default pico
+export default pico;
