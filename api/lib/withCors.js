@@ -1,7 +1,7 @@
 import { setHeaders } from './response';
 
-const withCors = (fn) => {
-  const res = fn();
+const withCors = fn => (req) => {
+  const res = fn(req);
   return setHeaders(
     {
       'Access-Control-Allow-Origin': '*',
