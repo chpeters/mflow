@@ -61,7 +61,7 @@ function getSql(query, id) {
 // handle the actual request and response
 export default pico(async (req) => {
   const queryString = url.parse(req.url, true).query;
-  const query = decodeURIComponent(queryString.query);
+  const query = JSON.parse(decodeURIComponent(queryString.query));
   const { id } = queryString;
   console.log(id);
   console.log(query);
