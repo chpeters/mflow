@@ -9,6 +9,7 @@ const makeConnection = require('../database/connection.js');
 
 // format the columns to be selected into SQL
 function formatSelect(selects) {
+  console.log(selects);
   let selectSql = '';
   selects.forEach((select) => {
     selectSql += `,${select}`;
