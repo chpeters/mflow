@@ -1,7 +1,8 @@
+import withCors from '../lib/withCors';
+
 const url = require('url');
 const connection = require('../database/connection.js');
 const pico = require('../lib/pico.js');
-const withCors = require('../lib/withCors.js');
 const res = require('../lib/response.js');
 
 // Get all queries needed for a user
