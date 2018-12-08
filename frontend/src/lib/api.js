@@ -60,7 +60,7 @@ export const getTransactionsByQuery = async (query, id) => {
   const query_json = query.query_json
   const encodedQuery = encodeURIComponent(query_json)
   const data = await jsonFetch(
-    `https://mflow.tech/api/transaction/getTransactionsByQuery?query=${encodedQuery}&user_id=${id}`
+    `https://mflow.tech/api/transaction/fetchTransactionsFromQuery?query=${encodedQuery}&user_id=${id}`
   )
   switch (visualization_type) {
     case 'LINE_CHART':

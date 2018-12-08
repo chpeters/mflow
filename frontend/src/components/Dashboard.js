@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
     const { queries } = this.props
     try {
       const responses = await Promise.all(
-        queries.map(q => getTransactionsByQuery(q))
+        queries.map(q => getTransactionsByQuery(q, 1))
       )
       const queriesWithData = queries.map((q, i) => {
         return {
@@ -31,6 +31,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { queriesWithData } = this.state
+    console.log(queriesWithData)
     if (!queriesWithData) {
       return <Heading>Loading...</Heading>
     }

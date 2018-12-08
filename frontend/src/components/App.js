@@ -95,9 +95,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { transactions, dashboards, currentDashboard, queries } = this.state
+    const { dashboards, currentDashboard, queries } = this.state
+    console.log(dashboards, currentDashboard, queries)
 
-    if (!transactions || !dashboards) {
+    if (!dashboards) {
       return <Heading>Loading...</Heading>
     }
 
@@ -132,7 +133,10 @@ class App extends React.Component {
               {dashboards
                 .filter(d => d.dashboard_id !== currentDashboard)
                 .map(d => (
-                  <button onClick={() => this.switchDashboard(d.dashboard_id)}>
+                  <button
+                    key={d.dashboard_id}
+                    onClick={() => this.switchDashboard(d.dashboard_id)}
+                  >
                     {d.name}
                   </button>
                 ))}
