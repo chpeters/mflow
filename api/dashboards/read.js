@@ -23,5 +23,6 @@ export default pico(
       console.log('error');
       return res(error, 400);
     });
+    console.log('finish query');
   }),
 );
