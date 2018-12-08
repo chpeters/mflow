@@ -10,6 +10,10 @@ import { end } from './response';
  *                                returns a response object
  *
  */
-const pico = f => (req, res) => end(res, f(req));
+const pico = f => (req, res) => new Promise(resolve => resolve(f(req)))
+  .then((val) => {
+    end(res, val);
+  })
+  .catch(err => console.log(err));
 
 export default pico;

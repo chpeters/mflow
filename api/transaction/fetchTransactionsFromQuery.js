@@ -3,7 +3,7 @@ import pico from '../lib/pico';
 
 const url = require('url');
 const res = require('../lib/response.js');
-const connection = require('../database/connection.js');
+const makeConnection = require('../database/connection.js');
 // Fetch all transactions specified by a given query for a specific user
 // This requires translating JSON formatted MRQL queries into SQL
 
@@ -59,18 +59,16 @@ function getSql(query, id) {
 }
 
 // handle the actual request and response
-export default pico((req) => {
+export default pico(async (req) => {
   const queryString = url.parse(req.url, true).query;
   const query = decodeURIComponent(queryString.query);
   const { id } = queryString;
   const sqlStr = getSql(query, id);
-  connection.query(sqlStr, (error, results, fields) => {
-    if (error) {
-      throw error;
-    } else if (results !== null) {
-      return withCors(res(results));
-    } else {
-      return withCors(res(error, 400));
-    }
-  });
+  const conn = await makeConnection();
+  const results = await conn.query(sqlStr);
+  try {
+    return withCors(res(results, 200));
+  } catch (error) {
+    return withCors(res(error, 400));
+  }
 });

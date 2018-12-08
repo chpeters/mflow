@@ -1,10 +1,10 @@
-var mysql = require('mysql')
+const mysql = require('promise-mysql');
 
-var connection = mysql.createConnection({
+const makeConnection = async () => mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-})
+});
 
-module.exports = connection
+module.exports = makeConnection;

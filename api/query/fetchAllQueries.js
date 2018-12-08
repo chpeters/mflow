@@ -2,7 +2,7 @@ import withCors from '../lib/withCors';
 import pico from '../lib/pico';
 
 const url = require('url');
-const connection = require('../database/connection.js');
+const makeConnection = require('../database/connection.js');
 const res = require('../lib/response.js');
 
 // Get all queries needed for a user
@@ -10,12 +10,13 @@ const sql = `select dashboard_id, query_id, visualization_type, query.name as na
   join dashboard_to_query using (dashboard_id) 
   join query using (query_id) `;
 
-export default pico((req) => {
+export default pico(async (req) => {
   const { id } = url.parse(req.url, true).query;
-  connection.query(`${sql}where dashboard_id = ${id}`, (error, results, fields) => {
-    if (!error && results !== null) {
-      return withCors(res(results));
-    }
+  try {
+    const conn = await makeConnection();
+    const results = await conn.query(`${sql}where dashboard_id = ${id}`);
+    return withCors(res(results, 200));
+  } catch (error) {
     return withCors(res(error, 400));
-  });
+  }
 });
