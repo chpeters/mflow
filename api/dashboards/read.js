@@ -14,7 +14,8 @@ export default pico((req) => {
   const { id } = url.parse(req.url, true).query;
   connection.query(`select * from dashboard where user_id = ${id}`, (error, results, fields) => {
     if (!error && results !== null) {
-      return withCors(res(results));
+      console.log(results);
+      return withCors(res(results, 200));
     }
     return withCors(res(error, 400));
   });
