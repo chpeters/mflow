@@ -4,7 +4,7 @@
     "HOST": "@host-key",
     "USER": "@user-key",
     "PASSWORD": "@password-key",
-    "DATABASE": "@datbase-key"
+    "DATABASE": "@database-key"
   },
   "builds": [
     { "src": "frontend/package.json", "use": "@now/static-build" },
