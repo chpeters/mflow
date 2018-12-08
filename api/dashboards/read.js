@@ -21,4 +21,5 @@ export default pico((req) => {
     console.log('error');
     return withCors(res(error, 400));
   });
+  console.log('didnt wait');
 });
