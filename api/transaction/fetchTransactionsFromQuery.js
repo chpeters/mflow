@@ -1,7 +1,7 @@
 import withCors from '../lib/withCors';
+import pico from '../lib/pico';
 
 const url = require('url');
-const pico = require('../lib/pico.js');
 const res = require('../lib/response.js');
 const connection = require('../database/connection.js');
 // Fetch all transactions specified by a given query for a specific user

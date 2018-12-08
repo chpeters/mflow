@@ -1,8 +1,8 @@
 import withCors from '../lib/withCors';
+import pico from '../lib/pico';
 
 const url = require('url');
 const connection = require('../database/connection.js');
-const pico = require('../lib/pico.js');
 const res = require('../lib/response.js');
 
 // Get all queries needed for a user

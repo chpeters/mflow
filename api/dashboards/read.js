@@ -1,7 +1,7 @@
 import withCors from '../lib/withCors';
+import pico from '../lib/pico';
 
 const url = require('url');
-const pico = require('../lib/pico.js');
 const res = require('../lib/response.js');
 const connection = require('../database/connection.js');
 // Get all dashboards for a user.
