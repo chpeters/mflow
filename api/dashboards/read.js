@@ -6,6 +6,7 @@ const connection = require('../database/connection.js')
 // save the data there and use it, so we won't need to query
 // for a specific dashboard.
 module.exports = (req, res) => {
+  console.log('made it')
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader(
     'Access-Control-Allow-Methods',
