@@ -1,7 +1,7 @@
 async function jsonFetch(url, options) {
   console.log(url)
   try {
-    const res = await fetch(url, options)
+    const res = await fetch(url, { mode: 'cors', ...options })
     console.log(res)
     const resJson = await res.json()
     if (res.ok) {
