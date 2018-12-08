@@ -1,8 +1,8 @@
 import { setHeaders } from './response';
 
 const withCors = fn => (req) => {
-  console.log('made it');
   const res = fn(req);
+  console.log(res);
   return setHeaders(
     {
       'Access-Control-Allow-Origin': '*',
