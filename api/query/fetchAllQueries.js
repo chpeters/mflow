@@ -10,14 +10,12 @@ const sql = `select dashboard_id, query_id, visualization_type, query.name as na
   join dashboard_to_query using (dashboard_id) 
   join query using (query_id) `;
 
-export default pico(
-  withCors((req) => {
-    const { id } = url.parse(req.url, true).query;
-    connection.query(`${sql}where dashboard_id = ${id}`, (error, results, fields) => {
-      if (!error && results !== null) {
-        return res(results);
-      }
-      return res(error, 400);
-    });
-  }),
-);
+export default pico((req) => {
+  const { id } = url.parse(req.url, true).query;
+  connection.query(`${sql}where dashboard_id = ${id}`, (error, results, fields) => {
+    if (!error && results !== null) {
+      return withCors(res(results));
+    }
+    return withCors(res(error, 400));
+  });
+});

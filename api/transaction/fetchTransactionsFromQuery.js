@@ -59,20 +59,18 @@ function getSql(query, id) {
 }
 
 // handle the actual request and response
-export default pico(
-  withCors((req) => {
-    const queryString = url.parse(req.url, true).query;
-    const query = decodeURIComponent(queryString.query);
-    const { id } = queryString;
-    const sqlStr = getSql(query, id);
-    connection.query(sqlStr, (error, results, fields) => {
-      if (error) {
-        throw error;
-      } else if (results !== null) {
-        return res(results);
-      } else {
-        return res(error, 400);
-      }
-    });
-  }),
-);
+export default pico((req) => {
+  const queryString = url.parse(req.url, true).query;
+  const query = decodeURIComponent(queryString.query);
+  const { id } = queryString;
+  const sqlStr = getSql(query, id);
+  connection.query(sqlStr, (error, results, fields) => {
+    if (error) {
+      throw error;
+    } else if (results !== null) {
+      return withCors(res(results));
+    } else {
+      return withCors(res(error, 400));
+    }
+  });
+});

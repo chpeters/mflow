@@ -10,19 +10,12 @@ const connection = require('../database/connection.js');
 // and once they're loaded on the front end we'll most likely
 // save the data there and use it, so we won't need to query
 // for a specific dashboard.
-export default pico(
-  withCors((req) => {
-    console.log(req);
-    const { id } = url.parse(req.url, true).query;
-    console.log(id);
-    connection.query(`select * from dashboard where user_id = ${id}`, (error, results, fields) => {
-      if (!error && results !== null) {
-        console.log('results');
-        return res(results);
-      }
-      console.log('error');
-      return res(error, 400);
-    });
-    console.log('finish query');
-  }),
-);
+export default pico((req) => {
+  const { id } = url.parse(req.url, true).query;
+  connection.query(`select * from dashboard where user_id = ${id}`, (error, results, fields) => {
+    if (!error && results !== null) {
+      return withCors(res(results));
+    }
+    return withCors(res(error, 400));
+  });
+});
