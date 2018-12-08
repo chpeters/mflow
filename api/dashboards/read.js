@@ -1,8 +1,7 @@
-import pico from '../lib/pico';
-import res from '../lib/response';
-import withCors from '../lib/withCors';
-
 const url = require('url');
+const pico = require('../lib/pico');
+const res = require('../lib/response');
+const withCors = require('../lib/withCors');
 const connection = require('../database/connection.js');
 // Get all dashboards for a user.
 // This will be the way we use this endpoint because
@@ -15,7 +14,7 @@ module.exports = pico(
     const { id } = url.parse(req.url, true).query;
     connection.query(`select * from dashboard where user_id = ${id}`, (error, results, fields) => {
       if (!error && results !== null) {
-        return res(results, 200);
+        return res(results);
       }
       return res(error, 400);
     });
