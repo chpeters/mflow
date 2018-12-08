@@ -63,10 +63,10 @@ export default pico(async (req) => {
   const queryString = url.parse(req.url, true).query;
   const query = decodeURIComponent(queryString.query);
   const { id } = queryString;
-  const sqlStr = getSql(query, id);
   console.log(id);
-  console.log(sqlStr);
   console.log(query);
+  const sqlStr = getSql(query, id);
+  console.log(sqlStr);
   try {
     const conn = await makeConnection();
     const results = await conn.query(sqlStr);
