@@ -85,7 +85,7 @@ class App extends React.Component {
       const dashboards = await getDashboards(1)
       this.setDashboards(dashboards)
       if (dashboards && dashboards.length > 0) {
-        const id = dashboards[0].id
+        const id = dashboards[0].dashboard_id
         const queriesForFirst = await getQueries(id)
         this.setQueries(id, queriesForFirst)
       }
