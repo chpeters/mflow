@@ -23,7 +23,8 @@ module.exports = (req, res) => {
   console.log(`id: ${id}`);
   connection.query(`select * from dashboard where user_id = ${id}`, (error, results, fields) => {
     if (!error && results !== null) {
-      res.end(results);
+      console.log(results);
+      res.end(JSON.stringify(results));
     } else {
       res.statusCode = 400;
       res.end();
