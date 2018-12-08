@@ -1,5 +1,6 @@
 var mysql = require('mysql')
 
+console.log('made it')
 console.log(process.env.HOST)
 console.log(process.env.USER)
 console.log(process.env.PASSWORD)
