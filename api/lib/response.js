@@ -1,6 +1,6 @@
 export const setHeaders = (obj, res) => {
-  const curr = res.headers;
-  for (const key in obj) {
+  const curr = res.headers || {};
+  for (const key of Object.keys(obj)) {
     curr[key.toLowerCase()] = obj[key];
   }
   return {

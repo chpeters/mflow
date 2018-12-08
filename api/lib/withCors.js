@@ -1,6 +1,8 @@
 import { setHeaders } from './response';
 
 const withCors = fn => (req) => {
+  console.log(fn);
+  console.log(req);
   const res = fn(req);
   console.log(res);
   console.log('with cors');
