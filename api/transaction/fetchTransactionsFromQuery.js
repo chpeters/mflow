@@ -1,8 +1,8 @@
 import withCors from '../lib/withCors';
 import pico from '../lib/pico';
+import res from '../lib/response';
 
 const url = require('url');
-const res = require('../lib/response.js');
 const makeConnection = require('../database/connection.js');
 // Fetch all transactions specified by a given query for a specific user
 // This requires translating JSON formatted MRQL queries into SQL

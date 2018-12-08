@@ -1,8 +1,8 @@
 import withCors from '../lib/withCors';
 import pico from '../lib/pico';
+import res from '../lib/response';
 
 const url = require('url');
-const res = require('../lib/response.js');
 const makeConnection = require('../database/connection.js');
 // Get all dashboards for a user.
 // This will be the way we use this endpoint because
