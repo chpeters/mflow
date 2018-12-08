@@ -1,7 +1,7 @@
-async function jsonFetch(url, body) {
+async function jsonFetch(url, options) {
   console.log(url)
   try {
-    const res = await fetch(url, { body })
+    const res = await fetch(url, options)
     console.log(res)
     const resJson = await res.json()
     if (res.ok) {
@@ -74,8 +74,9 @@ export const getTransactionsByQuery = async (query, id) => {
   }
 }
 
-const addDashboardJson = { dashboard_id: 1, user_id: 1, name: 'test' }
-export const addDashboard = () => Promise.resolve(addDashboardJson)
+// const addDashboardJson = { dashboard_id: 1, user_id: 1, name: 'test' }
+export const addDashboard = () =>
+  jsonFetch(`https://mflow.tech/api/dashboards/create`, { method: 'POST' })
 
 export const getQueries = async id =>
   jsonFetch(`https://mflow.tech/api/query/fetchAllQueries?id=${id}`)
