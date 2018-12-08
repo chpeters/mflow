@@ -1,5 +1,11 @@
 {
   "version": 2,
+  "env": {
+    "HOST": "@host-key",
+    "USER": "@user-key",
+    "PASSWORD": "@password-key",
+    "DATABASE": "@datbase-key"
+  },
   "builds": [
     { "src": "frontend/package.json", "use": "@now/static-build" },
     { "src": "api/!(lib)/**/*.js", "use": "@now/node" }
