@@ -1,7 +1,7 @@
 const url = require('url');
-const pico = require('../lib/pico');
-const withCors = require('../lib/withCors');
-const res = require('../lib/response');
+const pico = require('../lib/pico.js');
+const withCors = require('../lib/withCors.js');
+const res = require('../lib/response.js');
 const connection = require('../database/connection.js');
 // Fetch all transactions specified by a given query for a specific user
 // This requires translating JSON formatted MRQL queries into SQL

@@ -1,8 +1,8 @@
 const url = require('url');
 const connection = require('../database/connection.js');
-const pico = require('../lib/pico');
-const withCors = require('../lib/withCors');
-const res = require('../lib/response');
+const pico = require('../lib/pico.js');
+const withCors = require('../lib/withCors.js');
+const res = require('../lib/response.js');
 
 // Get all queries needed for a user
 const sql = `select dashboard_id, query_id, visualization_type, query.name as name, query_json from dashboard '
