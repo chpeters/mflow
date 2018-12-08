@@ -6,7 +6,7 @@ const url = require('url');
 const makeConnection = require('../database/connection.js');
 
 // Get all queries needed for a user
-const sql = `select dashboard_id, query_id, visualization_type, query.name as name, query_json from dashboard '
+const sql = `select dashboard_id, query_id, visualization_type, query.name as name, query_json from dashboard
   join dashboard_to_query using (dashboard_id) 
   join query using (query_id) `;
 
