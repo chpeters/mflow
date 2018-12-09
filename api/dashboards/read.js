@@ -3,7 +3,8 @@ import pico from '../lib/pico';
 import res from '../lib/response';
 
 const url = require('url');
-const makeConnection = require('../database/connection.js');
+const mysql = require('promise-mysql');
+const config = require('../database/config.js');
 // Get all dashboards for a user.
 // This will be the way we use this endpoint because
 // a user should see all their dashboards after they log in
@@ -13,7 +14,7 @@ const makeConnection = require('../database/connection.js');
 export default pico(async (req) => {
   const { id } = url.parse(req.url, true).query;
   try {
-    const conn = await makeConnection();
+    const conn = await mysql.createConnection(config);
     const results = await conn.query(`select * from dashboard where user_id = ${id}`);
     conn.end();
     return withCors(res(results, 200));

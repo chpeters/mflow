@@ -5,8 +5,8 @@ import { Flex } from 'rebass'
 const VisualizationList = ({ queries }) => {
   return (
     <>
-      {queries.map(({ data, query: { name, visualization_type } }) => (
-        <Flex key={name} justifyContent="center">
+      {queries.map(({ data, query: { name, visualization_type } }, index) => (
+        <Flex key={index} justifyContent="center">
           <Visualization title={name} data={data} type={visualization_type} />
         </Flex>
       ))}
