@@ -125,7 +125,7 @@ class App extends React.Component {
             </Heading>
           </Box>
         </Flex>
-        <Flex>
+        <Flex justifyContent="center">
           <Box>
             <Heading fontSize={24} my={15}>
               Current dashboard:
