@@ -56,7 +56,7 @@ function getSql(query, id) {
   const selectWithFuncs = addFunctions(selectStr, query.function, query.select.length > 0);
   const whereStr = formatWheres(query.where);
   const groupStr = formatGroups(query.group);
-  return `${selectWithFuncs} from transaction where user_id=${id} ${whereStr} ${groupStr}`;
+  return `${selectWithFuncs} from transaction where user_id=${id} ${whereStr} ${groupStr} limit 10`;
 }
 
 // handle the actual request and response
