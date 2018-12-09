@@ -21,7 +21,7 @@ const Visualization = ({ title, data, type }) => {
   return (
     <Card
       borderRadius={10}
-      boxShadow="0px 0px 12px 1px rgba(0, 0, 0, 0.2)"
+      boxShadow="0px 2px 4px 1px rgba(0, 0, 0, 0.2)"
       width={1}
       mt={50}
       pt={15}

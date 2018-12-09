@@ -46,6 +46,8 @@ function handleLineChart(data, query) {
 // expected sql format: select <series> <value> from transaction where <series> = <input>
 // (or <series> = <inputx>)
 function handleBarAndPieChart(data, query) {
+  console.log('data:', data)
+  console.log('query:', query)
   const series = query.select[0]
   const value = query.select[1]
   const returnData = []
@@ -59,16 +61,19 @@ export const getTransactionsByQuery = async (query, id) => {
   const visualization_type = query.visualization_type
   const query_json = query.query_json
   const encodedQuery = encodeURIComponent(query_json)
+  const parsed_json = JSON.parse(query_json)
   const data = await jsonFetch(
     `https://mflow.tech/api/transaction/fetchTransactionsFromQuery?query=${encodedQuery}&id=${id}`
   )
+  console.log(query_json)
+  console.log(data)
   switch (visualization_type) {
     case 'LINE_CHART':
-      return handleLineChart(data, query_json)
+      return handleLineChart(data, parsed_json)
     case 'BAR_CHART':
-      return handleBarAndPieChart(data, query_json)
+      return handleBarAndPieChart(data, parsed_json)
     case 'PIE_CHART':
-      return handleBarAndPieChart(data, query_json)
+      return handleBarAndPieChart(data, parsed_json)
     default:
       console.log('Unknown visualization type provided')
   }

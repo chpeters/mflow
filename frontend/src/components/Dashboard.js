@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { queriesWithData } = this.state
-    console.log(queriesWithData)
+    console.log('queries with data', queriesWithData)
     if (!queriesWithData) {
       return <Heading>Loading...</Heading>
     }
