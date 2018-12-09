@@ -15,6 +15,7 @@ export default pico(async (req) => {
   try {
     const conn = await makeConnection();
     const results = await conn.query(`${sql}where dashboard_id = ${id}`);
+    conn.end();
     return withCors(res(results, 200));
   } catch (error) {
     console.log(error);

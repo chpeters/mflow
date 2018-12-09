@@ -63,14 +63,11 @@ export default pico(async (req) => {
   const queryString = url.parse(req.url, true).query;
   const query = JSON.parse(decodeURIComponent(queryString.query));
   const { id } = queryString;
-  console.log(id);
-  console.log(query);
   const sqlStr = getSql(query, id);
-  console.log(sqlStr);
   try {
     const conn = await makeConnection();
     const results = await conn.query(sqlStr);
-    console.log(results);
+    conn.end();
     return withCors(res(results, 200));
   } catch (error) {
     return withCors(res(error, 400));

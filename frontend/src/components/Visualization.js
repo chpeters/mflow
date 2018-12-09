@@ -13,15 +13,15 @@ import { ResponsivePie } from '@nivo/pie'
  */
 const Visualization = ({ title, data, type }) => {
   let choices = {
-    bar: <ResponsiveBar data={data} height={375} colorBy="index" />,
-    pie: <ResponsivePie data={data} height={375} />,
-    line: <ResponsiveLine data={data} height={375} />,
+    BAR_CHART: <ResponsiveBar data={data} height={375} colorBy="index" />,
+    PIE_CHART: <ResponsivePie data={data} height={375} />,
+    LINE_CHART: <ResponsiveLine data={data} height={375} />,
   }
 
   return (
     <Card
       borderRadius={10}
-      boxShadow="0px 2px 4px 1px rgba(0, 0, 0, 0.2)"
+      boxShadow="0px 2px 4px 0px rgba(0, 0, 0, 0.2)"
       width={1}
       mt={50}
       pt={15}

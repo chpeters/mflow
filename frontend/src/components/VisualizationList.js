@@ -6,7 +6,7 @@ const VisualizationList = ({ queries }) => {
   return (
     <>
       {queries.map(({ data, query: { name, visualization_type } }) => (
-        <Flex justifyContent="center">
+        <Flex key={name} justifyContent="center">
           <Visualization title={name} data={data} type={visualization_type} />
         </Flex>
       ))}
