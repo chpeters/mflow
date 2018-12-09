@@ -24,12 +24,16 @@ function handleLineChart(data, query) {
   const y = query.select[2]
   const seriesMap = {}
   data.forEach(datum => {
+    console.log(datum)
     if (seriesMap[datum[series]]) {
-      seriesMap[datum[series]]['data'].push({ x: datum[x], y: datum[y] })
+      seriesMap[datum[series]]['data'].push({
+        x: datum[x].substring(5, 10),
+        y: datum[y],
+      })
     } else {
       seriesMap[datum[series]] = {
         id: datum[series],
-        data: [{ x: datum[x], y: datum[y] }],
+        data: [{ x: datum[x].substring(5, 10), y: datum[y] }],
       }
     }
   })

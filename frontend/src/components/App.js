@@ -128,7 +128,7 @@ class App extends React.Component {
         <Flex>
           <Box>
             <Heading fontSize={24} my={15}>
-              Change current dashboard:
+              Current dashboard:
               {dashboards
                 .filter(d => d.dashboard_id !== currentDashboard)
                 .map((d, index) => (
