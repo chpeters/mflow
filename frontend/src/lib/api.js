@@ -1,8 +1,6 @@
 async function jsonFetch(url, options) {
-  console.log(url)
   try {
     const res = await fetch(url, { mode: 'cors', ...options })
-    console.log(res)
     const resJson = await res.json()
     if (res.ok) {
       return resJson
@@ -46,10 +44,10 @@ function handleLineChart(data, query) {
 // expected sql format: select <series> <value> from transaction where <series> = <input>
 // (or <series> = <inputx>)
 function handleBarAndPieChart(data, query) {
-  console.log('data:', data)
-  console.log('query:', query)
+  console.log(query)
   const series = query.select[0]
-  const value = query.select[1]
+  const value = `${query.function[0].function}(${query.function[0].key})`
+  console.log(series, value, data)
   const returnData = []
   data.forEach(datum => {
     returnData.push({ id: datum[series], value: datum[value] })
@@ -65,8 +63,6 @@ export const getTransactionsByQuery = async (query, id) => {
   const data = await jsonFetch(
     `https://mflow.tech/api/transaction/fetchTransactionsFromQuery?query=${encodedQuery}&id=${id}`
   )
-  console.log(query_json)
-  console.log(data)
   switch (visualization_type) {
     case 'LINE_CHART':
       return handleLineChart(data, parsed_json)

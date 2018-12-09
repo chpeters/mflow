@@ -96,7 +96,6 @@ class App extends React.Component {
 
   render() {
     const { dashboards, currentDashboard, queries } = this.state
-    console.log(dashboards, currentDashboard, queries)
 
     if (!dashboards) {
       return <Heading>Loading...</Heading>
@@ -132,9 +131,9 @@ class App extends React.Component {
               Change current dashboard:
               {dashboards
                 .filter(d => d.dashboard_id !== currentDashboard)
-                .map(d => (
+                .map((d, index) => (
                   <button
-                    key={d.dashboard_id}
+                    key={index}
                     onClick={() => this.switchDashboard(d.dashboard_id)}
                   >
                     {d.name}
